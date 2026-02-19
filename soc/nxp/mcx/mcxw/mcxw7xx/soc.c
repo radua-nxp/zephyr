@@ -138,6 +138,8 @@ __weak void clock_init(void)
 #ifndef CONFIG_SOC_MCXW70AC
 	CLOCK_SetIpSrc(kCLOCK_Flexio0, kCLOCK_IpSrcFro192M);
 	CLOCK_SetIpSrcDiv(kCLOCK_Flexio0, kSCG_SysClkDivBy6);
+#else
+	CLOCK_EnableClock(kCLOCK_Tstmr0);
 #endif
 
 	/* Ungate clocks if the peripheral is enabled in devicetree */
