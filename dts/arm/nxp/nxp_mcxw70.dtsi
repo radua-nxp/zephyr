@@ -66,11 +66,15 @@
 
 	soc {
 		fmu_0: memory-controller@50017000 {
-			/* Map both physical internal flash and Flash Logical Window (FLW)
-			 * FLW is used for address translation, the main core image should link to FLW.
-			 * Physical flash should be used only for storage */
-			ranges = <0x0 0x10000000 0x180000>, /* physical internal flash */
-					 <0x800000 0x10800000 0x128000>; /* Flash Logic Window (FLW) */
+			/*
+			 * Map both physical internal flash and Flash
+			 * Logical Window (FLW). FLW is used for address
+			 * translation, the main core image should link
+			 * to FLW. Physical flash should be used only
+			 * for storage.
+			 */
+			ranges = <0x0 0x10000000 0x180000>, /* physical flash */
+				 <0x800000 0x800000 0x128000>; /* FLW */
 			#address-cells = <1>;
 			#size-cells = <1>;
 			compatible = "nxp,msf1";
@@ -109,10 +113,10 @@
 				compatible = "mmio-sram";
 			};
 
-			stcm_shared: stcm_shared@1e000 {
+			stcm_shared: stcm_shared@1e300 {
 				/* Use non-secure address range */
-				ranges = <0x0 0x2001e000 DT_SIZE_K(8)>;
-				reg = <0x1e000 DT_SIZE_K(8)>;
+				ranges = <0x0 0x2001e300 DT_SIZE_K(8)>;
+				reg = <0x1e300 DT_SIZE_K(8)>;
 				compatible = "zephyr,memory-region", "mmio-sram";
 				zephyr,memory-region = "STCM_SHARED";
 				#address-cells = <1>;
@@ -474,7 +478,7 @@
 
 	ieee802154: ieee802154 {
 		compatible = "nxp,mcxw-ieee802154";
-		status = "disabled";
+		status = "okay";
 	};
 
 	rtc_0: rtc@9000 {

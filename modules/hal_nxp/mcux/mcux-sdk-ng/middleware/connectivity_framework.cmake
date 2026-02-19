@@ -55,6 +55,7 @@ if(CONFIG_SOC_SERIES_MCXW7XX)
             gPlatformSetSfcConfigAtInit_d=0
             gPlatformSetWakeUpDelayAtInit_d=0
             gPlatformSetBleMaxTxPowerAtInit_d=0
+            gBoardUseFro32k_d=1
         )
     endif()
 endif()
